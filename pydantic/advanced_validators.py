@@ -29,3 +29,15 @@ class User(BaseModel):
 
 user = User(email="Deed@deed.com   ")
 print(user.email)
+
+
+# $4.44 -- > 4.44
+class Product(BaseModel):
+    price: str
+
+    @field_validator('price',mode='before')
+    def parse(cls, v):
+        return float(v.replace('$',''))
+
+product = Product(price="$4.44")
+print(product)
